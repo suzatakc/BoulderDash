@@ -13,6 +13,7 @@ import java.util.Objects;
 
 public class Level {
 
+
     Level level;
 
     public JPanel loadLevel(JPanel gamePanel) throws IOException {
