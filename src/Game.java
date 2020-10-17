@@ -1,5 +1,3 @@
-import utils.Helper;
-
 import javax.swing.*;
 import java.io.IOException;
 
@@ -21,16 +19,8 @@ public class Game {
 
     }
 
-
-
-
     void test() {
-        Helper helper = new Helper();
-        try {
-            helper.fileReaderStream(1);
-        } catch (IOException exception) {
-            exception.printStackTrace();
-        }
+
     }
 
 }

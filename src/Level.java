@@ -11,77 +11,18 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Objects;
 
-public class Level {
+class Level {
 
+    static JButton[][] levelButtons = new JButton[20][20];
 
-    Level level;
-
-    public JPanel loadLevel(JPanel gamePanel) throws IOException {
-        level = new Level();
-        JButton[][] levelButtons = new JButton[20][20];
-        Border emptyBorder = BorderFactory.createEmptyBorder();
+    JPanel loadLevel(JPanel gamePanel) throws IOException {
         String[][] levelMapText = new Level().getLevelMapArray(1);
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j++) {
-                levelButtons[i][j] = new JButton();
-                levelButtons[i][j].setBackground(null);
-                levelButtons[i][j].setMargin(new Insets(0, 0, 0, 0));
-
-                levelButtons[i][j].setBorder(emptyBorder);
                 Icon tempIcon = getCorrespondingIcon(levelMapText[i][j]);
-                int finalI = i;
-                int finalJ = j;
-                levelButtons[i][j].addKeyListener(
-                        new KeyAdapter() {
-
-                            @Override
-                            public void keyPressed(KeyEvent e) {
-                                int keyCode = e.getKeyCode();
-                                switch (keyCode) {
-                                    case KeyEvent.VK_UP:
-                                        levelButtons[finalI -1][finalJ].setIcon(levelButtons[finalI][finalJ].getIcon());
-                                        levelButtons[finalI -1][finalJ].requestFocus();
-                                        levelButtons[finalI][finalJ].setIcon(GameIcons.emptyIcon);
-                                        levelButtons[finalI][finalJ].setFocusPainted(false);
-                                        // handle up
-                                        break;
-
-                                    case KeyEvent.VK_DOWN:
-                                        levelButtons[finalI +1][finalJ].setIcon(levelButtons[finalI][finalJ].getIcon());
-                                        levelButtons[finalI +1][finalJ].requestFocus();
-                                        levelButtons[finalI][finalJ].setIcon(GameIcons.emptyIcon);
-                                        levelButtons[finalI][finalJ].setFocusPainted(false);
-                                        // handle down
-                                        break;
-
-                                    case KeyEvent.VK_LEFT:
-                                        levelButtons[finalI][finalJ -1].setIcon(levelButtons[finalI][finalJ].getIcon());
-                                        levelButtons[finalI][finalJ - 1].requestFocus();
-                                        levelButtons[finalI][finalJ].setIcon(GameIcons.emptyIcon);
-                                        levelButtons[finalI][finalJ].setFocusPainted(false);
-                                        // handle left
-                                        break;
-
-                                    case KeyEvent.VK_RIGHT:
-                                        levelButtons[finalI][finalJ + 1].setIcon(levelButtons[finalI][finalJ].getIcon());
-                                        levelButtons[finalI][finalJ + 1].requestFocus();
-                                        levelButtons[finalI][finalJ].setIcon(GameIcons.emptyIcon);
-                                        levelButtons[finalI][finalJ].setFocusPainted(false);
-
-
-                                        // handle right
-                                        break;
-                                }
-                            }
-
-
-                        });
-                if (Objects.equals(tempIcon, GameIcons.playerIcon)) {
-
-
-                }
-                levelButtons[i][j].setIcon(tempIcon);
+                levelButtons[i][j] = new PlayingButton(tempIcon,i,j);
                 gamePanel.add(levelButtons[i][j]);
+
             }
         }
         return gamePanel;
@@ -120,8 +61,7 @@ public class Level {
         }
     }
 
-
-    public String[][] getLevelMapArray(int level) throws IOException {
+    private String[][] getLevelMapArray(int level) throws IOException {
 
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream(
                 "maps/level-one.txt");
@@ -150,6 +90,5 @@ public class Level {
         return map;
 
     }
-
 
 }
