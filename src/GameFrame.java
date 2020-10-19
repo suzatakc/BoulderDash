@@ -4,7 +4,7 @@ import java.awt.*;
 public class GameFrame extends JFrame {
 
     public GameFrame() {
-        this.setSize(1100, 710);
+        this.setSize(1100, 730);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
     }
@@ -14,7 +14,7 @@ public class GameFrame extends JFrame {
         gamePanel = new JPanel();
         gamePanel.setLayout(new GridLayout(20, 20));
         gamePanel.setBackground(new Color(0, 0, 0));
-        gamePanel.setBounds(0, 0, 800, 710);
+        gamePanel.setBounds(0, 0, 800, 730);
         return gamePanel;
     }
 

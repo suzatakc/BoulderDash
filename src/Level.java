@@ -53,9 +53,6 @@ class Level {
             case "*":
                 return GameIcons.doubleCoinIcon;
 
-            case "@":
-                return GameIcons.heavyBoulderIcon;
-
             default:
                 return null;
         }
